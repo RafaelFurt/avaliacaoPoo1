@@ -1,13 +1,14 @@
 
 import java.util.Scanner;
 import arquivos.Pilotos;
+import arquivos.Exceção.PilotoNaoEncontrado;
 
 public class App {
     private static int TAMANHO_INICIAL = 2;
     private static Scanner scanner = new Scanner(System.in);
     private static Pilotos[] _Pilotos = new Pilotos[TAMANHO_INICIAL];
     private static int _NumeroPiloto = 0;
-
+    private static String Pesquisa;
     public static void main(String[] args) throws Exception {
         boolean continuarExecutando = true;
 
@@ -32,10 +33,10 @@ public class App {
                 listarPilotos();
                 break;
             }
-            /*case 3:{
-                consultarcpf();
+            case 3:{
+                consultarcpfPiloto();
                 break;
-            }*/
+            }
             case 4:{
                 aumentarArmazenamento();
                 break;
@@ -53,19 +54,21 @@ public class App {
         return true;
     }
 
-    private static void cadastrarPiloto() {
+    private static void cadastrarPiloto() throws PilotoNaoEncontrado {
     if (_NumeroPiloto == _Pilotos.length){
         System.out.println("Sem Espaço de armazenamento");
-        }
+    }
     else{
         System.out.println("Insira o nome do piloto: ");
         String nome = scanner.nextLine();
         System.out.println("Insira o CPF do piloto: ");
         String cpf = scanner.nextLine();
         
+        
     Pilotos piloto = new Pilotos(nome, cpf);
     NovaListaDePiloto(piloto);}
     }
+
     private static void NovaListaDePiloto(Pilotos piloto){
         if(_NumeroPiloto == _Pilotos.length){
             Pilotos[] novaLista = new Pilotos[_Pilotos.length * 2];
@@ -79,6 +82,17 @@ public class App {
         _NumeroPiloto++;
         }   
 
+    private static Pilotos consultarcpfPiloto()  throws PilotoNaoEncontrado {
+        System.out.println("Digite o CPF do piloto: ");
+        Pesquisa = scanner.nextLine();
+        for (Pilotos piloto: _Pilotos) {
+            if (piloto != null && piloto.getcpf().equals(Pesquisa)) {
+                System.out.println(piloto);
+                return (piloto);
+            }
+        }
+        throw new PilotoNaoEncontrado(Pesquisa);
+    }
     private static void listarPilotos() {   
         if (_NumeroPiloto == 0){
             System.out.println("Não há pilotos cadastrados para exibir.");
