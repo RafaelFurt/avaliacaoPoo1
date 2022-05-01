@@ -3,7 +3,7 @@ import java.util.Scanner;
 import arquivos.Pilotos;
 
 public class App {
-    private static  int TAMANHO_INICIAL = 2;
+    private static int TAMANHO_INICIAL = 2;
     private static Scanner scanner = new Scanner(System.in);
     private static Pilotos[] _Pilotos = new Pilotos[TAMANHO_INICIAL];
     private static int _NumeroPiloto = 0;
@@ -41,7 +41,7 @@ public class App {
                 break;
             }
             case 5: {
-                System.out.println("Saindo do sistema...");
+                System.out.println("GoodBye...");
                 return false;
             }
             default: {
@@ -79,16 +79,19 @@ public class App {
         _NumeroPiloto++;
         }   
 
-    private static void listarPilotos() {
+    private static void listarPilotos() {   
+        if (_NumeroPiloto == 0){
+            System.out.println("Não há pilotos cadastrados para exibir.");
+        }else{
             System.out.println("Lista de motoristas cadastrados:");
             for (int i = 0; i < _NumeroPiloto; i++) {
             System.out.println(_Pilotos[i]);
-            }
+            }}
     }
     private static void aumentarArmazenamento(){
-            System.out.println("Informe a nova quantidade de armazenamento.");
+            System.out.println("Informe a nova capacidade de armazenamento.");
             TAMANHO_INICIAL= scanner.nextInt(); 
-            System.out.println("Capacidade de armazenamento aumentada.");
+            System.out.println("Capacidade aumentada com sucesso.");
     }
 
     private static void visualizarMenu(){
