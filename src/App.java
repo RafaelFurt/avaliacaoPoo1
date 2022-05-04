@@ -89,6 +89,7 @@ public class App {
             if (piloto != null && piloto.getcpf().equals(Pesquisa)) {
                 System.out.println(piloto);
                 return (piloto);
+
             }
         }
         throw new PilotoNaoEncontrado(Pesquisa);
